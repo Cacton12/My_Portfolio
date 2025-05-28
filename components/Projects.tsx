@@ -11,10 +11,10 @@ const projects = [
   },
   {
     title: "Student Scores App",
-    description: "This was our final project for our ",
-    videoUrl: "/demos/2025-05-28 14-55-07.mkv", // example video
-    details: "More details here",
-    src: "/StudentScores.png",
+    description: "This was my final project for my Object Oreintated Programming class.",
+    videoUrl: "/demos/2025-05-28 14-55-07.mkv",
+    details: "I used c# with ADO.NET to create multiple forms to manage studnet grades",
+    src: "/StudentScores2.PNG",
     button: "View Project",
   },
   {
@@ -28,17 +28,17 @@ const projects = [
   {
     title: "Networking Project",
     description: "This is a project for my networking class my  project was about DNS (Domain Name System) and how it works.",
-    videoUrl: "/demos/Everything About Domain Names - Google Chrome 2025-05-28 16-29-05.mp4", // example video
-    details: "More details here",
+    videoUrl: "/demos/Everything About Domain Names - Google Chrome 2025-05-28 16-29-05.mp4",
+    details: "This project I had to show my knowledge of DNS but I also wanted to use only HTML and CSS to create a website.",
     src: "/ResearchProject.png",
     button: "View Project",
   },
   {
     title: "This Portfolio",
     description: "I created this portfolio as a way to present myself better than a resume and to show my skills as a developer",
-    videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4", // example video
-    details: "More details here",
-    src: "/Screenshot 2025-04-29 175745.png",
+    videoUrl: "/demos/Create Next App - Google Chrome 2025-05-28 18-37-01.mp4",
+    details: "I create this portfolio using next.js, tailwindcss, and framer motion for the animations.",
+    src: "/Portfolio2.png",
     button: "View Project",
   },
   
