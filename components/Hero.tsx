@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const backgroundImages = [
-  "/Cat.jpg",
-  "/Cow.jpg",
-  "/Rabbit.avif",
+  "/PicturesOfMe/Berta.jpeg",
+  "/PicturesOfMe/image3.jpeg",
+  "/PicturesOfMe/image2.jpeg",
 ];
 
 export default function Hero() {

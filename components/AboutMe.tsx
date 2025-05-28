@@ -35,7 +35,7 @@ export default function AboutMe() {
           transition={{ duration: 0.8 }}
         >
           <img
-            src="/golden-retriever-tongue-out.jpg"
+            src="PicturesOfMe/image0.jpeg"
             alt="Golden Retriever"
             className="w-full h-auto object-cover rounded-lg"
           />
@@ -72,7 +72,7 @@ export default function AboutMe() {
           transition={{ duration: 0.8 }}
         >
           <img
-            src="/golden-retriever-tongue-out.jpg"
+            src="/PicturesOfMe/Sackville.jpg"
             alt="Golden Retriever"
             className="w-full h-auto object-cover rounded-lg"
           />
