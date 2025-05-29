@@ -15,7 +15,7 @@ export default function ContactMe() {
           <span className="text-blue-500">Contact</span> Me
         </h2>
         <p className="text-lg text-gray-300 mb-8">
-          Interested in working together or just want to say hi? Feel free to reach out!
+          Interested in a passonite developer? Feel free to reach out!
         </p>
 
         <motion.a
@@ -24,7 +24,7 @@ export default function ContactMe() {
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
-          Send Me an Email
+          Colbyacton12@icloud.com
         </motion.a>
 
         <div className="mt-10">

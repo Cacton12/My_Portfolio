@@ -54,7 +54,7 @@ export default function AboutMe() {
         >
           <h2 className="text-4xl font-bold mb-6"><span className="text-blue-500">Where</span> I’m From</h2>
           <p className="text-lg leading-relaxed text-gray-300">
-            I’m an Indigenous student from the small town of Sackville, New Brunswick. After high school, I moved to Fredericton to study Civil Engineering at UNB,
+            I’m a proud member of Fort Mckay First Nation in alberta but grew up in the small town of Sackville, New Brunswick. After high school, I moved to Fredericton to study Civil Engineering at UNB,
             but I quickly realized it wasn’t the right path for me. So, I stepped away from school and spent some time working jobs like lawn care and trail 
             construction with the City of Fredericton and UNB. Those jobs taught me a lot — how to be responsible, stay disciplined, and solve problems on the fly. 
             But most importantly, they gave me the space to figure out what I really wanted. That’s when I realized my true passion is technology. I ended up 
