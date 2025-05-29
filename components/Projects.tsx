@@ -14,13 +14,13 @@ const projects = [
     description: "This was my final project for my Object Oreintated Programming class.",
     videoUrl: "/demos/2025-05-28 14-55-07.mkv",
     details: "I used c# with ADO.NET to create multiple forms to manage studnet grades",
-    src: "/StudentScores2.PNG",
+    src: "/StudentScores2.png",
     button: "View Project",
   },
   {
     title: "Hotel Reservation App",
     description: "This is a Java application made as a final project to my introduction to java class.",
-    videoUrl: "/demos/2025-05-28 15-07-33.mkv", // example video
+    videoUrl: "/demos/2025-05-28 15-07-33.mkv",
     details: "This app was made with Java. The calculate button takes the price per night multiplied byt the differenec between the arrival and departure dates. The Book It! button doesnt work as its suppsoed to hit a database but I no longer have one set up.",
     src: "/HotelReservation.png",
     button: "View Project",
