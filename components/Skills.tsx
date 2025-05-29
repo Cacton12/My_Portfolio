@@ -20,6 +20,7 @@ const skills = [
   "JavaFx",
   ".NET",
   "Docker",
+  "Next.js",
 ];
 
 export default function Skills() {
