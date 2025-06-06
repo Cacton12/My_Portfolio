@@ -1,5 +1,5 @@
 "use client";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
+import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useRef, useId } from "react";
 import { FlipCard } from "./FlipCard";
 import { motion } from "framer-motion";
@@ -138,7 +138,7 @@ interface CarouselControlProps {
   handleClick: () => void;
 }
 
-const CarouselControl = ({
+const CarouselControlright = ({
   type,
   title,
   handleClick,
@@ -155,6 +155,25 @@ const CarouselControl = ({
     </button>
   );
 };
+
+const CarouselControlleft = ({
+  type,
+  title,
+  handleClick,
+}: CarouselControlProps) => {
+  return (
+    <button
+      className={`w-10 h-10 flex items-center mx-2 justify-center bg-neutral-200 dark:bg-neutral-800 border-3 border-transparent rounded-full focus:border-[#6D64F7] focus:outline-none hover:-translate-y-0.5 active:translate-y-0.5 transition duration-200${
+        type === "previous" ? "rotate-180" : ""
+      }`}
+      title={title}
+      onClick={handleClick}
+    >
+      <IconArrowNarrowLeft className="text-neutral-600 dark:text-neutral-200" />
+    </button>
+  );
+};
+
 
 interface CarouselProps {
   slides: Project[];
@@ -198,12 +217,12 @@ export function Carousel({ slides }: CarouselProps) {
             </ul>
         </div>
         <div className="flex justify-center pt-8">
-        <CarouselControl
+        <CarouselControlleft
           type="previous"
           title="Go to previous slide"
           handleClick={handlePreviousClick}
         />
-        <CarouselControl
+        <CarouselControlright
           type="next"
           title="Go to next slide"
           handleClick={handleNextClick}

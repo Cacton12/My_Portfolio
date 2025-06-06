@@ -2,11 +2,11 @@ import  { Carousel } from "@/components/ui/carousel";
 
 const projects = [
   {
-    title: "Artolog Website",
-    description: "This was my capstone project at the end of my program. A team and I worked together with business analysts to add features the client wanted into artolog.ca",
-    videoUrl: "demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
-    details: "We used php with laravel as a framework and a SQL database ",
-    src: "/artolog3.png",
+    title: "Hotel Reservation App",
+    description: "This is a Java application made as a final project to my introduction to java class.",
+    videoUrl: "/demos/2025-05-28 15-07-33.mkv",
+    details: "This app was made with Java. The calculate button takes the price per night multiplied byt the differenec between the arrival and departure dates. The Book It! button doesnt work as its suppsoed to hit a database but I no longer have one set up.",
+    src: "/HotelReservation.png",
     button: "View Project",
   },
   {
@@ -18,11 +18,11 @@ const projects = [
     button: "View Project",
   },
   {
-    title: "Hotel Reservation App",
-    description: "This is a Java application made as a final project to my introduction to java class.",
-    videoUrl: "/demos/2025-05-28 15-07-33.mkv",
-    details: "This app was made with Java. The calculate button takes the price per night multiplied byt the differenec between the arrival and departure dates. The Book It! button doesnt work as its suppsoed to hit a database but I no longer have one set up.",
-    src: "/HotelReservation.png",
+    title: "Artolog Website",
+    description: "This was my capstone project at the end of my program. A team and I worked together with business analysts to add features the client wanted into artolog.ca",
+    videoUrl: "demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
+    details: "We used php with laravel as a framework and a SQL database ",
+    src: "/artolog3.png",
     button: "View Project",
   },
   {
