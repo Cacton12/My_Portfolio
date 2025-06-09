@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import EmailSection from "./EmailSection";
 
 export default function ContactMe() {
   return (
@@ -18,14 +19,7 @@ export default function ContactMe() {
           Interested in a passonite developer? Feel free to reach out!
         </p>
 
-        <motion.a
-          href="mailto:colbyacton12@icloud.com"
-          className="inline-block text-xl text-white underline mb-6 hover:text-blue-400 transition"
-          whileHover={{ scale: 1.05 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          Colbyacton12@icloud.com
-        </motion.a>
+        <EmailSection />
 
         <div className="mt-10">
           <h3 className="text-2xl font-semibold mb-4">Connect with me</h3>

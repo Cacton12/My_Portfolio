@@ -1,6 +1,6 @@
 "use client";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons-react";
-import { useState, useRef, useId } from "react";
+import { useState, useRef, useId, } from "react";
 import { FlipCard } from "./FlipCard";
 import { motion } from "framer-motion";
 
@@ -23,6 +23,8 @@ const Slide = ({ slide, index, current }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
   const [offsetX, setOffsetX] = useState(0);
   const [offsetY, setOffsetY] = useState(0);
+
+
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!slideRef.current) return;
@@ -127,7 +129,7 @@ const Slide = ({ slide, index, current }: SlideProps) => {
       className={`relative w-[70vmin] h-[70vmin] mx-[4vmin] z-10 perspective-[1000px]
       ${current === index ? "opacity-100" : "opacity-50 pointer-events-none"}`}
     >
-      <FlipCard frontContent={frontContent} backContent={backContent} />
+      <FlipCard frontContent={frontContent} backContent={backContent} showButton={current === index}/>
     </li>
   );
 };
