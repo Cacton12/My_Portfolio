@@ -116,7 +116,7 @@ const Slide = ({ slide, index, current }: SlideProps) => {
           />
         )}
 
-        <p className="text-sm md:text-base">{details}</p>
+        <p className="text-sm md:text-base" dangerouslySetInnerHTML={{ __html: details }} />
     </div>
     );
 
