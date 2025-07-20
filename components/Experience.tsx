@@ -8,9 +8,9 @@ const experiences = [
   {
     role: "Labourer",
     company: "City of Fredericton",
-    period: "May - September 2023 and June - September 2024",
+    period: "current",
     description:
-      "Maintained parks and trails through mowing, trimming, brush work, and equipment operation. Built adaptability, problem-solving skills, and public engagement experience.",
+      "Maintain parks and trails through mowing, trimming, and equipment operation. Built adaptability, problem-solving skills, and public engagement experience.",
   },
   {
     role: "Labourer",
@@ -22,9 +22,9 @@ const experiences = [
   {
     role: "Software Developer Intern",
     company: "Spandrel Interactive",
-    period: "April - Current",
+    period: "April - June 2025",
     description:
-      "Currently focused on resolving bugs, collaborating closely with the QA team to ensure the website functions smoothly and meets quality standards. Creating a user-friendly experience through iterative fixes.",
+      "Focused on resolving bugs, collaborating closely with the QA team to ensure the website functions smoothly and meets quality standards. Creating a user-friendly experience through iterative fixes.",
   },
 ];
 

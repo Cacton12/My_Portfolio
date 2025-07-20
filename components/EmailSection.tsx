@@ -148,9 +148,7 @@ export default function ContactForm() {
 
       {status && (
         <p
-          className={`text-center mt-2 ${
-            status.startsWith("✅") ? "text-green-400" : "text-red-400"
-          }`}
+          className={`text-center mt-2 text-green-500`}
           role="alert"
         >
           {status}

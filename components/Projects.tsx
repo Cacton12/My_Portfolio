@@ -17,20 +17,20 @@ const projects = [
     src: "/StudentScores2.png",
     button: "View Project",
   },
-  {
-    title: "Artolog Website",
-    description: "This was my capstone project at the end of my program. A team and I worked together with business analysts to add features the client wanted into artolog.ca",
-    videoUrl: "demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
-    details: `We used php with laravel as a framework and a SQL database.<br> To view the actual site click here:<br><a href="https://artolog.ca/" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">https://artolog.ca/</a>`,
-    src: "/artolog3.png",
-    button: "View Project",
-  },
-  {
+    {
     title: "Cheap Games",
     description: "Website I created to give the cheapest game prices",
     videoUrl: "demos/Cheap Games - Google Chrome 2025-06-09 09-30-23.mp4",
     details: `This was a fun personal project I did. I wanted to try using Java Spring Boot to fetch APIs.<br> To view the actual site click here:<br><a href="https://cheap-games-frontend.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">https://cheap-games-frontend.vercel.app/</a>`,
     src: "/cheapGames.png",
+    button: "View Project",
+  },
+    {
+    title: "Artolog Website",
+    description: "This was my capstone project at the end of my program. A team and I worked together with business analysts to add features the client wanted into artolog.ca",
+    videoUrl: "demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
+    details: `We used php with laravel as a framework and a SQL database.<br> To view the actual site click here:<br><a href="https://artolog.ca/" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">https://artolog.ca/</a>`,
+    src: "/artolog3.png",
     button: "View Project",
   },
   {
