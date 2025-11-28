@@ -116,12 +116,11 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+
+  html, body {
+    @apply bg-[#0f172a] text-foreground; /* Dark background applied globally */
+    scroll-behavior: smooth;
     overflow-x: hidden;
   }
-  html {
-  scroll-behavior: smooth;
 }
 
-}

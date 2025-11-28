@@ -6,7 +6,7 @@ export default function AboutMe() {
   return (
     <div>
       <section
-        className="w-full mx-auto px-4 flex flex-col md:flex-row items-center gap-12 text-gray-100 justify-center pb-32 bg-gray-950 pt-25"
+        className="w-full mx-auto px-4 flex flex-col md:flex-row items-center gap-12 text-gray-100 justify-center pb-32 bg-black pt-25"
         id="about"
       >
         {/* Text area */}
@@ -43,7 +43,7 @@ export default function AboutMe() {
       </section>
 
       <section
-        className="w-full mx-auto px-4 flex flex-col md:flex-row items-center gap-12 text-gray-100 justify-center pb-32 bg-gray-950"
+        className="w-full mx-auto px-4 flex flex-col md:flex-row items-center gap-12 text-gray-100 justify-center pb-32 bg-black"
       >
         {/* Text area */}
         <motion.div
