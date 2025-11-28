@@ -15,16 +15,9 @@ export default function Home() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    const preloadVideos = projects.map(project => 
-      new Promise<void>((resolve) => {
-        const video = document.createElement("video");
-        video.src = project.videoUrl;
-        video.preload = "auto";
-        video.onloadeddata = () => resolve();
-        video.onerror = () => resolve();
-      })
-    );
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent);
 
+    // Preload images
     const preloadImages = projects.map(project =>
       new Promise<void>((resolve) => {
         const img = new Image();
@@ -34,12 +27,25 @@ export default function Home() {
       })
     );
 
-    Promise.all([...preloadVideos, ...preloadImages]).then(() => {
+    // Preload videos only on non-mobile devices
+    const preloadVideos = projects.map(project =>
+      new Promise<void>((resolve) => {
+        if (isMobile) return resolve(); // skip video preloading on mobile
+
+        const video = document.createElement("video");
+        video.src = project.videoUrl;
+        video.preload = "auto";
+        video.muted = true; // required for autoplay on some browsers
+        video.onloadeddata = () => resolve();
+        video.onerror = () => resolve();
+      })
+    );
+
+    Promise.all([...preloadImages, ...preloadVideos]).then(() => {
       setShowContent(true);
     });
   }, []);
 
-  // Only render content after preloading
   if (!showContent) return null;
 
   return (
