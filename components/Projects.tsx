@@ -26,13 +26,6 @@ function ProjectCard({
     videoRef.current.currentTime = 0;
   };
 
-  // Auto-play video on mobile if needed
-  useEffect(() => {
-    if (isMobile) {
-      videoRef.current?.play().catch(() => {});
-    }
-  }, [isMobile]);
-
   return (
     <motion.div
       onMouseEnter={!isMobile ? playPreview : undefined}
@@ -48,26 +41,32 @@ function ProjectCard({
       "
       onClick={() => openModal(index)}
     >
-      {!videoError ? (
+      {isMobile ? (
+        <img
+          src={project.mobileSrc ?? project.src ?? "/Rabbit.avif"}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";
+          }}
+        />
+      ) : !videoError ? (
         <video
           ref={videoRef}
-          src={isMobile ? project.mobileSrc ?? project.videoUrl : project.videoUrl}
-          poster={project.mobileSrc ?? project.src}
+          src={project.videoUrl}
+          poster={project.src}
           muted
           loop
           playsInline
-          autoPlay={!isMobile}
-          preload={isMobile ? "none" : "metadata"}
+          autoPlay
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover opacity-70"
-          onError={(e) => {
-            console.warn(`Project video failed to load: ${project.title}`, e);
-            setVideoError(true);
-          }}
+          onError={() => setVideoError(true)}
           onLoadedData={() => setVideoError(false)}
         />
       ) : (
         <img
-          src={project.mobileSrc ?? project.src ?? "/Rabbit.avif"}
+          src={project.src ?? "/Rabbit.avif"}
           alt={project.title}
           className="absolute inset-0 w-full h-full object-cover opacity-70"
           onError={(e) => {
@@ -81,7 +80,7 @@ function ProjectCard({
           className="text-gray-300 text-sm overflow-hidden mt-1"
           style={{
             display: "-webkit-box",
-            WebkitLineClamp: 2, // limit to 2 lines
+            WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
           }}
         >
@@ -109,25 +108,47 @@ function ProjectCard({
 export default function Projects({ isMobile }: ProjectsProps) {
   const [modalIndex, setModalIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-    const [featuredVideoError, setFeaturedVideoError] = useState(false);
-    const [modalVideoError, setModalVideoError] = useState(false);
+  const [featuredVideoError, setFeaturedVideoError] = useState(false);
+
+  const featuredProject = projects.find((p) => p.featured) ?? projects[0];
+  const featuredIndex = projects.indexOf(featuredProject);
+  const otherProjects = projects.filter((p) => p !== featuredProject);
 
   const closeModal = () => {
     videoRef.current?.pause();
     setModalIndex(null);
   };
 
-  const featuredProject = projects.find((p) => p.featured) ?? projects[0];
-  const featuredIndex = projects.indexOf(featuredProject);
-  const otherProjects = projects.filter((p) => p !== featuredProject);
+  const videoHasPlayableExtension = (url: string | undefined) => {
+    if (!url) return false;
+    const ext = url.split("?")[0].split("#")[0].split(".").pop()?.toLowerCase();
+    return ext === "mp4" || ext === "webm";
+  };
 
   // Autoplay featured video on mobile
   useEffect(() => {
     if (isMobile) {
-      const featuredVid = document.getElementById("featuredVideo") as HTMLVideoElement;
+      const featuredVid = document.getElementById(
+        "featuredVideo"
+      ) as HTMLVideoElement;
       featuredVid?.play().catch(() => {});
     }
   }, [isMobile]);
+
+  // Disable body scroll when modal is open
+  useEffect(() => {
+    if (modalIndex !== null) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      document.documentElement.style.overflow = "unset";
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.documentElement.style.overflow = "unset";
+      document.body.style.overflow = "unset";
+    };
+  }, [modalIndex]);
 
   return (
     <section
@@ -145,32 +166,35 @@ export default function Projects({ isMobile }: ProjectsProps) {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="
-          relative w-full max-w-7xl h-[26rem] bg-[#1e293b]
-          rounded-3xl shadow-2xl overflow-hidden cursor-pointer
-          hover:-translate-y-2 hover:shadow-3xl transition-all duration-300
-        "
+        className="relative w-full max-w-7xl h-[26rem] bg-[#1e293b] rounded-3xl shadow-2xl overflow-hidden cursor-pointer hover:-translate-y-2 hover:shadow-3xl transition-all duration-300"
       >
-        {!featuredVideoError ? (
+        {isMobile ? (
+          <img
+            src={
+              featuredProject.mobileSrc ?? featuredProject.src ?? "/Rabbit.avif"
+            }
+            alt={featuredProject.title}
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";
+            }}
+          />
+        ) : !featuredVideoError ? (
           <video
             id="featuredVideo"
-            src={isMobile ? featuredProject.mobileSrc ?? featuredProject.videoUrl : featuredProject.videoUrl}
-            poster={featuredProject.mobileSrc ?? featuredProject.src}
+            src={featuredProject.videoUrl}
+            poster={featuredProject.src}
             muted
             loop
             playsInline
-            autoPlay={!isMobile}
-            preload={isMobile ? "none" : "metadata"}
+            autoPlay
+            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover opacity-70"
-            onError={(e) => {
-              console.warn(`Featured video failed to load: ${featuredProject.title}`, e);
-              setFeaturedVideoError(true);
-            }}
-            onLoadedData={() => setFeaturedVideoError(false)}
+            onError={() => setFeaturedVideoError(true)}
           />
         ) : (
           <img
-            src={featuredProject.mobileSrc ?? featuredProject.src ?? "/Rabbit.avif"}
+            src={featuredProject.src ?? "/Rabbit.avif"}
             alt={featuredProject.title}
             className="absolute inset-0 w-full h-full object-cover opacity-70"
             onError={(e) => {
@@ -179,7 +203,9 @@ export default function Projects({ isMobile }: ProjectsProps) {
           />
         )}
         <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10 overflow-hidden">
-          <h2 className="text-4xl font-bold truncate">{featuredProject.title}</h2>
+          <h2 className="text-4xl font-bold truncate">
+            {featuredProject.title}
+          </h2>
           <p
             className="text-gray-200 text-lg mt-1 overflow-hidden"
             style={{
@@ -227,10 +253,15 @@ export default function Projects({ isMobile }: ProjectsProps) {
         <div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={closeModal}
+          style={{ overflow: "auto" }} // <-- allow scrolling inside the modal overlay
         >
           <div
             className="bg-gray-900 rounded-2xl max-w-3xl w-full p-6 relative shadow-2xl"
             onClick={(e) => e.stopPropagation()}
+            style={{
+              maxHeight: "90vh", // <-- limit modal height
+              overflowY: "auto", // <-- enable vertical scrolling
+            }}
           >
             <button
               onClick={closeModal}
@@ -247,14 +278,13 @@ export default function Projects({ isMobile }: ProjectsProps) {
             </p>
 
             <div className="relative w-full mb-4 rounded-xl overflow-hidden">
-              {!modalVideoError ? (
+              {videoHasPlayableExtension(projects[modalIndex].videoUrl) ? (
                 <video
                   ref={videoRef}
-                  src={isMobile
-                    ? projects[modalIndex].mobileSrc ?? projects[modalIndex].videoUrl
-                    : projects[modalIndex].videoUrl
+                  src={projects[modalIndex].videoUrl}
+                  poster={
+                    projects[modalIndex].mobileSrc ?? projects[modalIndex].src
                   }
-                  poster={projects[modalIndex].mobileSrc ?? projects[modalIndex].src}
                   className="w-full h-auto"
                   controls
                   autoPlay={!isMobile}
@@ -262,17 +292,19 @@ export default function Projects({ isMobile }: ProjectsProps) {
                   muted
                   playsInline
                   preload={isMobile ? "none" : "metadata"}
-                  onError={(e) => {
-                    console.warn(`Modal video failed to load: ${projects[modalIndex].title}`, e);
-                    setModalVideoError(true);
-                  }}
                 />
               ) : (
                 <img
-                  src={projects[modalIndex].mobileSrc ?? projects[modalIndex].src ?? "/Rabbit.avif"}
+                  src={
+                    projects[modalIndex].mobileSrc ??
+                    projects[modalIndex].src ??
+                    "/Rabbit.avif"
+                  }
                   alt={projects[modalIndex].title}
                   className="w-full h-auto object-cover rounded-xl"
-                  onError={(e) => {(e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";}}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";
+                  }}
                 />
               )}
             </div>
