@@ -5,6 +5,13 @@ import { motion } from "framer-motion";
 import { Briefcase, Download } from "lucide-react";
 
 const experiences = [
+    {
+    role: "Software Developer Intern",
+    company: "Spandrel Interactive",
+    period: "April - June 2025",
+    description:
+      "Focused on resolving bugs, collaborating closely with the QA team to ensure the website functions smoothly and meets quality standards. Creating a user-friendly experience through iterative fixes.",
+  },
   {
     role: "Labourer",
     company: "City of Fredericton",
@@ -18,13 +25,6 @@ const experiences = [
     period: "July - September 2023",
     description:
       "Mowed grass and performed various outdoor maintenance tasks. Gained hands-on experience, improved efficiency, and strengthened work ethic through consistent physical labor.",
-  },
-  {
-    role: "Software Developer Intern",
-    company: "Spandrel Interactive",
-    period: "April - June 2025",
-    description:
-      "Focused on resolving bugs, collaborating closely with the QA team to ensure the website functions smoothly and meets quality standards. Creating a user-friendly experience through iterative fixes.",
   },
 ];
 

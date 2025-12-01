@@ -1,14 +1,22 @@
-export type Project = {
+// ---- Types ----
+export interface Project {
   title: string;
   description: string;
   videoUrl: string;
   details: string;
-  src: string;
+  src: string;        // desktop image
+  mobileSrc?: string; // optional mobile image
   button: string;
   skills: string[];
   featured: boolean;
-};
+}
 
+// Props for the Projects component
+export interface ProjectsProps {
+  isMobile: boolean;
+}
+
+// ---- Data ----
 export const projects: Project[] = [
   {
     title: "Hotel Reservation App",
@@ -26,6 +34,7 @@ export const projects: Project[] = [
       </a>
     `,
     src: "/HotelReservation.png",
+    mobileSrc: "/HotelReservationMobile.png",
     button: "View Project",
     skills: ["Java", "OOP", "JavaFX"],
     featured: false,
@@ -45,6 +54,7 @@ export const projects: Project[] = [
       </a>
     `,
     src: "/StudentScores2.png",
+    mobileSrc: "/StudentScoresMobile.png",
     button: "View Project",
     skills: ["C#", "ADO.NET", "Windows Forms", "OOP"],
     featured: false,
@@ -54,7 +64,7 @@ export const projects: Project[] = [
     title: "Cheap Games",
     description:
       "A website that finds and displays the lowest game prices available online using third-party APIs.",
-    videoUrl: "demos/Cheap Games - Google Chrome 2025-06-09 09-30-23.mp4",
+    videoUrl: "/demos/Cheap Games - Google Chrome 2025-06-09 09-30-23.mp4",
     details: `
       This personal project was built using Java Spring Boot
       to integrate external APIs and fetch game pricing data.<br><br>
@@ -64,6 +74,7 @@ export const projects: Project[] = [
       </a>
     `,
     src: "/cheapGames.png",
+    mobileSrc: "/cheapGamesMobile.png",
     button: "View Project",
     skills: ["Java", "Spring Boot", "API Integration", "REST"],
     featured: false,
@@ -73,7 +84,7 @@ export const projects: Project[] = [
     title: "Artolog.ca",
     description:
       "A capstone project where my team collaborated with business analysts to implement new features for the Artolog.ca platform.",
-    videoUrl: "demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
+    videoUrl: "/demos/_ Artolog - Google Chrome 2025-05-28 15-15-39.mp4",
     details: `
       We used PHP with the Laravel framework alongside a SQL database
       to develop and deploy client-requested features in an agile team environment.<br><br>
@@ -83,9 +94,10 @@ export const projects: Project[] = [
       </a>
     `,
     src: "/artolog3.png",
+    mobileSrc: "/artologMobile.png",
     button: "View Project",
     skills: ["PHP", "Laravel", "SQL", "Backend Development", "Team Collaboration", "Agile"],
-    featured: true,
+    featured: false,
   },
 
   {
@@ -102,27 +114,33 @@ export const projects: Project[] = [
       </a>
     `,
     src: "/ResearchProject.png",
+    mobileSrc: "/ResearchProjectMobile.png",
     button: "View Project",
     skills: ["HTML", "CSS"],
     featured: false,
   },
 
-  {
-    title: "This Portfolio",
-    description:
-      "The website you are currently viewing, built to showcase my skills, personality, and completed work.",
-    videoUrl: "/demos/Create Next App - Google Chrome 2025-05-28 18-37-01.mp4",
-    details: `
-      Built using Next.js, TailwindCSS, and Framer Motion for smooth animations.
-      This project highlights my frontend capabilities, deployment experience, and UI/UX skills.<br><br>
-      View the code on GitHub:<br>
-      <a href="https://github.com/Cacton12/My_Portfolio" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
-        https://github.com/Cacton12/My_Portfolio
-      </a>
-    `,
-    src: "/Portfolio2.png",
-    button: "View Project",
-    skills: ["Next.js", "React", "TailwindCSS", "Framer Motion", "TypeScript"],
-    featured: false,
-  },
+ {
+  title: "Photo Storage App",
+  description:
+    "I'm currently building a full-stack photo storage web app that allows users to upload, store, and manage images securely in the cloud. This project is a work in progress, but a sneak peek at what is to come.",
+  videoUrl: "/demos/React App - Google Chrome 2025-12-01 09-01-54.mp4",
+  details: `
+    Built using React for the frontend and C# for the backend, with AWS Lambda hosting the backend and Vercel hosting the frontend. 
+    Images are stored in Cloudflare R2 buckets, while user data and photo links are managed in Azure Cosmos DB for fast and scalable NoSQL storage.<br><br>
+    Key features include secure photo uploads, cloud storage integration, and a responsive, intuitive UI.<br><br>
+    View the code on GitHub:<br>
+    <a href="https://github.com/Cacton12/storage_web_app" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
+      https://github.com/Cacton12/storage_web_app
+    </a>
+    <a href="https://github.com/Cacton12/StorageWebAppBackend" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
+      https://github.com/Cacton12/StorageWebAppBackend
+    </a>
+  `,
+  src: "/Photo_Storage_App.png",
+  mobileSrc: "/Photo_Storage_App_Mobile.png",
+  button: "View Project",
+  skills: ["React", "C#", "AWS Lambda", "Vercel", "Cloudflare R2", "Azure Cosmos DB"],
+  featured: true,
+},
 ];

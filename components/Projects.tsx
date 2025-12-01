@@ -2,19 +2,7 @@
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { projects } from "@/components/projectData";
-
-// -------------------- Types --------------------
-interface Project {
-  title: string;
-  description: string;
-  videoUrl: string;
-  details: string;
-  src: string;
-  button: string;
-  skills: string[];
-  featured: boolean;
-}
+import { projects, Project, ProjectsProps } from "@/components/projectData";
 
 // -------------------- Project Card --------------------
 function ProjectCard({
@@ -28,10 +16,7 @@ function ProjectCard({
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const playPreview = () => {
-    videoRef.current?.play().catch(() => {});
-  };
-
+  const playPreview = () => videoRef.current?.play().catch(() => {});
   const stopPreview = () => {
     if (!videoRef.current) return;
     videoRef.current.pause();
@@ -61,12 +46,19 @@ function ProjectCard({
         playsInline
         className="absolute inset-0 w-full h-full object-cover opacity-70"
       />
-
       <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10">
         <h2 className="text-xl font-bold text-white">{project.title}</h2>
-        <p className="text-gray-300 text-sm line-clamp-3">{project.description}</p>
-
-        <div className="flex flex-wrap gap-2">
+        <p
+          className="text-gray-300 text-sm overflow-hidden"
+          style={{
+            display: "-webkit-box",
+            WebkitLineClamp: 3, // max lines
+            WebkitBoxOrient: "vertical",
+          }}
+        >
+          {project.description}
+        </p>
+        <div className="flex flex-wrap gap-2 pt-2">
           {project.skills.map((skill, i) => (
             <span
               key={i}
@@ -76,7 +68,6 @@ function ProjectCard({
             </span>
           ))}
         </div>
-
         <button className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg w-32 mx-auto mt-3 shadow-md transition">
           {project.button}
         </button>
@@ -86,14 +77,17 @@ function ProjectCard({
 }
 
 // -------------------- Main Component --------------------
-export default function Projects() {
+export default function Projects({ isMobile }: ProjectsProps) {
   const [modalIndex, setModalIndex] = useState<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Get featured project
+  const closeModal = () => {
+    videoRef.current?.pause();
+    setModalIndex(null);
+  };
+
   const featuredProject = projects.find((p) => p.featured) ?? projects[0];
   const featuredIndex = projects.indexOf(featuredProject);
-
-  // Filter out featured project for the "All Projects" section
   const otherProjects = projects.filter((p) => p !== featuredProject);
 
   return (
@@ -119,19 +113,21 @@ export default function Projects() {
         "
       >
         <video
-          src={featuredProject.videoUrl}
+          src={
+            isMobile
+              ? featuredProject.mobileSrc ?? featuredProject.videoUrl
+              : featuredProject.videoUrl
+          }
           muted
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />
-
-        <div className="absolute inset-0 bg-black/60 p-10 flex flex-col justify-between z-10">
+        <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10">
           <h2 className="text-4xl font-bold">{featuredProject.title}</h2>
           <p className="text-gray-200 text-lg line-clamp-4">
             {featuredProject.description}
           </p>
-
           <div className="flex flex-wrap gap-3">
             {featuredProject.skills.map((skill, i) => (
               <span
@@ -142,10 +138,7 @@ export default function Projects() {
               </span>
             ))}
           </div>
-
-          <button
-            className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition w-44 mx-auto"
-          >
+          <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition w-44 mx-auto">
             {featuredProject.button}
           </button>
         </div>
@@ -155,7 +148,6 @@ export default function Projects() {
       <h1 className="text-5xl font-bold mt-24 mb-12 tracking-tight text-blue-500">
         Other Projects
       </h1>
-
       <div className="flex flex-wrap justify-center gap-12 w-full max-w-7xl">
         {otherProjects.map((project, i) => (
           <ProjectCard
@@ -171,33 +163,51 @@ export default function Projects() {
       {modalIndex !== null && (
         <div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
-          onClick={() => setModalIndex(null)}
+          onClick={closeModal}
         >
           <div
             className="bg-gray-900 rounded-2xl max-w-3xl w-full p-6 relative shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setModalIndex(null)}
+              onClick={closeModal}
               className="absolute top-4 right-4 text-white text-3xl font-bold hover:text-blue-400"
             >
               &times;
             </button>
 
-            <h2 className="text-3xl font-bold mb-3">{projects[modalIndex].title}</h2>
-            <p className="text-gray-300 mb-4">{projects[modalIndex].description}</p>
+            <h2 className="text-3xl font-bold mb-3">
+              {projects[modalIndex].title}
+            </h2>
+            <p className="text-gray-300 mb-4">
+              {projects[modalIndex].description}
+            </p>
 
-            <video
-              src={projects[modalIndex].videoUrl}
-              className="w-full h-72 object-cover rounded-xl mb-4"
-              autoPlay
-              loop
-              muted
-            />
+            {/* Video with fullscreen, works on mobile */}
+            <div className="relative w-full mb-4 rounded-xl overflow-hidden">
+              <video
+                ref={videoRef}
+                src={
+                  isMobile
+                    ? projects[modalIndex].mobileSrc ??
+                      projects[modalIndex].videoUrl
+                    : projects[modalIndex].videoUrl
+                }
+                className="w-full h-auto"
+                controls
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
               {projects[modalIndex].skills.map((skill, i) => (
-                <span key={i} className="text-xs bg-blue-500/50 px-2 py-1 rounded-full">
+                <span
+                  key={i}
+                  className="text-xs bg-blue-500/50 px-2 py-1 rounded-full"
+                >
                   {skill}
                 </span>
               ))}

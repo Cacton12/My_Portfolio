@@ -13,37 +13,38 @@ import { projects } from "@/components/projectData";
 
 export default function Home() {
   const [showContent, setShowContent] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(navigator.userAgent);
+    const mobileCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone/i.test(
+      navigator.userAgent
+    );
 
-    // Preload images
-    const preloadImages = projects.map(project =>
+    setIsMobile(mobileCheck);
+
+    const preloadImages = projects.map((project) =>
       new Promise<void>((resolve) => {
         const img = new Image();
-        img.src = project.src;
+        img.src = mobileCheck && project.mobileSrc ? project.mobileSrc : project.src;
         img.onload = () => resolve();
         img.onerror = () => resolve();
       })
     );
 
-    // Preload videos only on non-mobile devices
-    const preloadVideos = projects.map(project =>
+    const preloadVideos = projects.map((project) =>
       new Promise<void>((resolve) => {
-        if (isMobile) return resolve(); // skip video preloading on mobile
+        if (mobileCheck) return resolve(); // skip video preloading on mobile
 
         const video = document.createElement("video");
         video.src = project.videoUrl;
         video.preload = "auto";
-        video.muted = true; // required for autoplay on some browsers
+        video.muted = true;
         video.onloadeddata = () => resolve();
         video.onerror = () => resolve();
       })
     );
 
-    Promise.all([...preloadImages, ...preloadVideos]).then(() => {
-      setShowContent(true);
-    });
+    Promise.all([...preloadImages, ...preloadVideos]).then(() => setShowContent(true));
   }, []);
 
   if (!showContent) return null;
@@ -53,7 +54,7 @@ export default function Home() {
       <main className="overflow-x-hidden">
         <Navbar />
         <Hero />
-        <Projects />
+        <Projects isMobile={isMobile} /> {/* <-- pass mobile flag */}
         <AboutMe />
         <Education />
         <Experience />
