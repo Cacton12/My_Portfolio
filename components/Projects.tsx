@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { projects, Project, ProjectsProps } from "@/components/projectData";
 
@@ -9,10 +9,12 @@ function ProjectCard({
   project,
   index,
   openModal,
+  isMobile,
 }: {
   project: Project;
   index: number;
   openModal: (i: number) => void;
+  isMobile: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -23,10 +25,17 @@ function ProjectCard({
     videoRef.current.currentTime = 0;
   };
 
+  // Auto-play video on mobile if needed
+  useEffect(() => {
+    if (isMobile) {
+      videoRef.current?.play().catch(() => {});
+    }
+  }, [isMobile]);
+
   return (
     <motion.div
-      onMouseEnter={playPreview}
-      onMouseLeave={stopPreview}
+      onMouseEnter={!isMobile ? playPreview : undefined}
+      onMouseLeave={!isMobile ? stopPreview : undefined}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -40,25 +49,27 @@ function ProjectCard({
     >
       <video
         ref={videoRef}
-        src={project.videoUrl}
+        src={isMobile ? project.mobileSrc ?? project.videoUrl : project.videoUrl}
         muted
         loop
         playsInline
+        autoPlay
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover opacity-70"
       />
-      <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10">
+      <div className="absolute inset-0 bg-black/60 p-4 flex flex-col justify-between z-10 overflow-hidden">
         <h2 className="text-xl font-bold text-white">{project.title}</h2>
         <p
-          className="text-gray-300 text-sm overflow-hidden"
+          className="text-gray-300 text-sm overflow-hidden mt-1"
           style={{
             display: "-webkit-box",
-            WebkitLineClamp: 3, // max lines
+            WebkitLineClamp: 2, // limit to 2 lines
             WebkitBoxOrient: "vertical",
           }}
         >
           {project.description}
         </p>
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex flex-wrap gap-2 mt-2">
           {project.skills.map((skill, i) => (
             <span
               key={i}
@@ -68,7 +79,7 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <button className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg w-32 mx-auto mt-3 shadow-md transition">
+        <button className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg w-32 mx-auto mt-3 shadow-md transition text-sm">
           {project.button}
         </button>
       </div>
@@ -89,6 +100,14 @@ export default function Projects({ isMobile }: ProjectsProps) {
   const featuredProject = projects.find((p) => p.featured) ?? projects[0];
   const featuredIndex = projects.indexOf(featuredProject);
   const otherProjects = projects.filter((p) => p !== featuredProject);
+
+  // Autoplay featured video on mobile
+  useEffect(() => {
+    if (isMobile) {
+      const featuredVid = document.getElementById("featuredVideo") as HTMLVideoElement;
+      featuredVid?.play().catch(() => {});
+    }
+  }, [isMobile]);
 
   return (
     <section
@@ -113,22 +132,28 @@ export default function Projects({ isMobile }: ProjectsProps) {
         "
       >
         <video
-          src={
-            isMobile
-              ? featuredProject.mobileSrc ?? featuredProject.videoUrl
-              : featuredProject.videoUrl
-          }
+          id="featuredVideo"
+          src={isMobile ? featuredProject.mobileSrc ?? featuredProject.videoUrl : featuredProject.videoUrl}
           muted
           loop
           playsInline
+          autoPlay
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover opacity-70"
         />
-        <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10">
-          <h2 className="text-4xl font-bold">{featuredProject.title}</h2>
-          <p className="text-gray-200 text-lg line-clamp-4">
+        <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10 overflow-hidden">
+          <h2 className="text-4xl font-bold truncate">{featuredProject.title}</h2>
+          <p
+            className="text-gray-200 text-lg mt-1 overflow-hidden"
+            style={{
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+            }}
+          >
             {featuredProject.description}
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mt-2">
             {featuredProject.skills.map((skill, i) => (
               <span
                 key={i}
@@ -138,7 +163,7 @@ export default function Projects({ isMobile }: ProjectsProps) {
               </span>
             ))}
           </div>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition w-44 mx-auto">
+          <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition w-44 mx-auto text-sm">
             {featuredProject.button}
           </button>
         </div>
@@ -155,6 +180,7 @@ export default function Projects({ isMobile }: ProjectsProps) {
             project={project}
             index={i}
             openModal={setModalIndex}
+            isMobile={isMobile}
           />
         ))}
       </div>
@@ -183,15 +209,12 @@ export default function Projects({ isMobile }: ProjectsProps) {
               {projects[modalIndex].description}
             </p>
 
-            {/* Video with fullscreen, works on mobile */}
             <div className="relative w-full mb-4 rounded-xl overflow-hidden">
               <video
                 ref={videoRef}
-                src={
-                  isMobile
-                    ? projects[modalIndex].mobileSrc ??
-                      projects[modalIndex].videoUrl
-                    : projects[modalIndex].videoUrl
+                src={isMobile
+                  ? projects[modalIndex].mobileSrc ?? projects[modalIndex].videoUrl
+                  : projects[modalIndex].videoUrl
                 }
                 className="w-full h-auto"
                 controls
@@ -199,6 +222,7 @@ export default function Projects({ isMobile }: ProjectsProps) {
                 loop
                 muted
                 playsInline
+                preload="metadata"
               />
             </div>
 
