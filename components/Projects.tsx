@@ -17,6 +17,7 @@ function ProjectCard({
   isMobile: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
 
   const playPreview = () => videoRef.current?.play().catch(() => {});
   const stopPreview = () => {
@@ -47,16 +48,33 @@ function ProjectCard({
       "
       onClick={() => openModal(index)}
     >
-      <video
-        ref={videoRef}
-        src={isMobile ? project.mobileSrc ?? project.videoUrl : project.videoUrl}
-        muted
-        loop
-        playsInline
-        autoPlay
-        preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
-      />
+      {!videoError ? (
+        <video
+          ref={videoRef}
+          src={isMobile ? project.mobileSrc ?? project.videoUrl : project.videoUrl}
+          poster={project.mobileSrc ?? project.src}
+          muted
+          loop
+          playsInline
+          autoPlay={!isMobile}
+          preload={isMobile ? "none" : "metadata"}
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
+          onError={(e) => {
+            console.warn(`Project video failed to load: ${project.title}`, e);
+            setVideoError(true);
+          }}
+          onLoadedData={() => setVideoError(false)}
+        />
+      ) : (
+        <img
+          src={project.mobileSrc ?? project.src ?? "/Rabbit.avif"}
+          alt={project.title}
+          className="absolute inset-0 w-full h-full object-cover opacity-70"
+          onError={(e) => {
+            (e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";
+          }}
+        />
+      )}
       <div className="absolute inset-0 bg-black/60 p-4 flex flex-col justify-between z-10 overflow-hidden">
         <h2 className="text-xl font-bold text-white">{project.title}</h2>
         <p
@@ -91,6 +109,8 @@ function ProjectCard({
 export default function Projects({ isMobile }: ProjectsProps) {
   const [modalIndex, setModalIndex] = useState<number | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+    const [featuredVideoError, setFeaturedVideoError] = useState(false);
+    const [modalVideoError, setModalVideoError] = useState(false);
 
   const closeModal = () => {
     videoRef.current?.pause();
@@ -131,16 +151,33 @@ export default function Projects({ isMobile }: ProjectsProps) {
           hover:-translate-y-2 hover:shadow-3xl transition-all duration-300
         "
       >
-        <video
-          id="featuredVideo"
-          src={isMobile ? featuredProject.mobileSrc ?? featuredProject.videoUrl : featuredProject.videoUrl}
-          muted
-          loop
-          playsInline
-          autoPlay
-          preload="metadata"
-          className="absolute inset-0 w-full h-full object-cover opacity-70"
-        />
+        {!featuredVideoError ? (
+          <video
+            id="featuredVideo"
+            src={isMobile ? featuredProject.mobileSrc ?? featuredProject.videoUrl : featuredProject.videoUrl}
+            poster={featuredProject.mobileSrc ?? featuredProject.src}
+            muted
+            loop
+            playsInline
+            autoPlay={!isMobile}
+            preload={isMobile ? "none" : "metadata"}
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            onError={(e) => {
+              console.warn(`Featured video failed to load: ${featuredProject.title}`, e);
+              setFeaturedVideoError(true);
+            }}
+            onLoadedData={() => setFeaturedVideoError(false)}
+          />
+        ) : (
+          <img
+            src={featuredProject.mobileSrc ?? featuredProject.src ?? "/Rabbit.avif"}
+            alt={featuredProject.title}
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";
+            }}
+          />
+        )}
         <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-between z-10 overflow-hidden">
           <h2 className="text-4xl font-bold truncate">{featuredProject.title}</h2>
           <p
@@ -210,20 +247,34 @@ export default function Projects({ isMobile }: ProjectsProps) {
             </p>
 
             <div className="relative w-full mb-4 rounded-xl overflow-hidden">
-              <video
-                ref={videoRef}
-                src={isMobile
-                  ? projects[modalIndex].mobileSrc ?? projects[modalIndex].videoUrl
-                  : projects[modalIndex].videoUrl
-                }
-                className="w-full h-auto"
-                controls
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
+              {!modalVideoError ? (
+                <video
+                  ref={videoRef}
+                  src={isMobile
+                    ? projects[modalIndex].mobileSrc ?? projects[modalIndex].videoUrl
+                    : projects[modalIndex].videoUrl
+                  }
+                  poster={projects[modalIndex].mobileSrc ?? projects[modalIndex].src}
+                  className="w-full h-auto"
+                  controls
+                  autoPlay={!isMobile}
+                  loop
+                  muted
+                  playsInline
+                  preload={isMobile ? "none" : "metadata"}
+                  onError={(e) => {
+                    console.warn(`Modal video failed to load: ${projects[modalIndex].title}`, e);
+                    setModalVideoError(true);
+                  }}
+                />
+              ) : (
+                <img
+                  src={projects[modalIndex].mobileSrc ?? projects[modalIndex].src ?? "/Rabbit.avif"}
+                  alt={projects[modalIndex].title}
+                  className="w-full h-auto object-cover rounded-xl"
+                  onError={(e) => {(e.currentTarget as HTMLImageElement).src = "/Rabbit.avif";}}
+                />
+              )}
             </div>
 
             <div className="flex flex-wrap gap-2 mb-4">
