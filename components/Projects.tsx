@@ -225,10 +225,15 @@ export default function Projects({ isMobile }: ProjectsProps) {
                 {skill}
               </span>
             ))}
-          </div>
-          <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition w-44 mx-auto text-sm">
-            {featuredProject.button}
-          </button>
+          </div>{/* Buttons side by side */}
+    <div className="flex justify-center gap-4 mt-4">
+      <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm">
+        {featuredProject.button}
+      </button>
+      <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm">
+        <a href="https://storage-web-app2.vercel.app/">View Project</a>
+      </button>
+    </div>
         </div>
       </motion.div>
 

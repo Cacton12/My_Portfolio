@@ -33,7 +33,7 @@ export const projects: Project[] = [
     `,
     src: "/artolog3.png",
     mobileSrc: "/artolog.png",
-    button: "View Project",
+    button: "Learn More",
     skills: [
       "PHP",
       "Laravel",
@@ -61,7 +61,7 @@ export const projects: Project[] = [
     `,
     src: "/ResearchProject.png",
     mobileSrc: "/ResearchProject.png",
-    button: "View Project",
+    button: "Learn More",
     skills: ["HTML", "CSS"],
     featured: false,
   },
@@ -81,7 +81,7 @@ export const projects: Project[] = [
     `,
     src: "/cheapGames.png",
     mobileSrc: "/cheapGames.png",
-    button: "View Project",
+    button: "Learn More",
     skills: ["Java", "Spring Boot", "API Integration", "REST"],
     featured: false,
   },
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     `,
     src: "/HotelReservation.png",
     mobileSrc: "/HotelReservation.png",
-    button: "View Project",
+    button: "Learn More",
     skills: ["Java", "OOP", "JavaFX"],
     featured: false,
   },
@@ -122,18 +122,19 @@ export const projects: Project[] = [
     `,
     src: "/StudentScores2.png",
     mobileSrc: "/StudentScores.png",
-    button: "View Project",
+    button: "Learn More",
     skills: ["C#", "ADO.NET", "Windows Forms", "OOP"],
     featured: false,
   },
   {
     title: "Photo Storage App",
     description:
-      "I'm currently building a full-stack photo storage web app that allows users to upload, store, and manage images securely in the cloud. This project is a work in progress, but a sneak peek at what is to come.",
+      "I have built a full-stack photo storage web app that allows users to upload, store, and manage images securely in the cloud. The app is fully functional and ready for use, offering a seamless and secure experience for managing photos.",
     videoUrl: "/demos/React App - Google Chrome 2025-12-01 09-01-54.mp4",
-    details: `
-    Built using React for the frontend and C# for the backend, with AWS Lambda hosting the backend and Vercel hosting the frontend. 
-    Images are stored in Cloudflare R2 buckets, while user data and photo links are managed in Azure Cosmos DB for fast and scalable NoSQL storage.<br><br>
+ details: `
+    Built using Next.js for the frontend and C# for the backend, with Cloudflare Workers serving as a middle layer and Railway hosting the backend. 
+    Images are stored in Cloudflare R2 buckets, while user data and photo links are managed in Azure Cosmos DB.<br><br>
+    Upload flow: users upload an image via the frontend → Cloudflare Workers (middle layer) → C# backend → Cloudflare R2 storage → Cosmos DB for metadata → backend forwards the response → returned to the frontend through the middle layer.<br><br>
     Key features include secure photo uploads, cloud storage integration, and a responsive, intuitive UI.<br><br>
     View the code on GitHub:<br>
     <a href="https://github.com/Cacton12/storage_web_app" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
@@ -143,17 +144,17 @@ export const projects: Project[] = [
       https://github.com/Cacton12/StorageWebAppBackend
     </a>
   `,
-    src: "/Photo_Storage_App.png",
-    mobileSrc: "/Photo_Storage_App.png",
-    button: "View Project",
-    skills: [
-      "React",
-      "C#",
-      "AWS Lambda",
-      "Vercel",
-      "Cloudflare R2",
-      "Azure Cosmos DB",
-    ],
-    featured: true,
-  },
+  src: "/Photo_Storage_App.png",
+  mobileSrc: "/Photo_Storage_App.png",
+  button: "Learn More",
+  skills: [
+    "Next.js",
+    "C#",
+    "Cloudflare Workers",
+    "Railway",
+    "Cloudflare R2",
+    "Azure Cosmos DB",
+  ],
+  featured: true,
+},
 ];
