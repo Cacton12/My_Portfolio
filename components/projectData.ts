@@ -1,26 +1,24 @@
 // ---- Types ----
-// ---- Types ----
 export interface Project {
   title: string;
   description: string;
   videoUrl: string;
   details: string;
-  src: string; // desktop image
-  mobileSrc?: string; // optional mobile image
+  src: string;
+  mobileSrc?: string;
   button: string;
   skills: string[];
   featured: boolean;
-  liveUrl?: string; // optional live website URL
+  liveUrl?: string;
 }
 
-// Props for the Projects component
 export interface ProjectsProps {
   isMobile: boolean;
 }
 
 // ---- Data ----
 export const projects: Project[] = [
-    {
+  {
     title: "AI Background Remover",
     description:
       "A web app that instantly removes image backgrounds locally in the browser using AI — no uploads required.",
@@ -38,7 +36,7 @@ export const projects: Project[] = [
     button: "Learn More",
     skills: ["React", "Tailwind CSS", "JavaScript", "Web Workers", "AI", "transformers.js"],
     featured: false,
-    liveUrl: "https://ai-website-navy-one.vercel.app/",
+    liveUrl: "https://ai-background-remover-nu.vercel.app/",
   },
   {
     title: "Artolog.ca",
@@ -66,7 +64,6 @@ export const projects: Project[] = [
     ],
     featured: false,
   },
-
   {
     title: "Networking Project",
     description:
