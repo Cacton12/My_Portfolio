@@ -1,4 +1,5 @@
 // ---- Types ----
+// ---- Types ----
 export interface Project {
   title: string;
   description: string;
@@ -9,6 +10,7 @@ export interface Project {
   button: string;
   skills: string[];
   featured: boolean;
+  liveUrl?: string; // optional live website URL
 }
 
 // Props for the Projects component
@@ -33,9 +35,10 @@ export const projects: Project[] = [
   `,
     src: "/Background_Gone.png",
     mobileSrc: "/Background_Gone.png",
-    button: "Try It",
+    button: "Learn More",
     skills: ["React", "Tailwind CSS", "JavaScript", "Web Workers", "AI", "transformers.js"],
     featured: false,
+    liveUrl: "https://ai-website-navy-one.vercel.app/",
   },
   {
     title: "Artolog.ca",
@@ -114,5 +117,6 @@ export const projects: Project[] = [
       "Azure Cosmos DB",
     ],
     featured: true,
+    liveUrl: "https://storage-web-app2.vercel.app/",
   },
 ];

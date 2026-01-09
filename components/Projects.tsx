@@ -96,9 +96,22 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <button className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg w-32 mx-auto mt-3 shadow-md transition text-sm">
-          {project.button}
-        </button>
+        <div className="flex justify-center gap-2 mt-3">
+          <button className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-lg shadow-md transition text-sm">
+            {project.button}
+          </button>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-lg shadow-md transition text-sm inline-block"
+            >
+              View Project
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -225,15 +238,24 @@ export default function Projects({ isMobile }: ProjectsProps) {
                 {skill}
               </span>
             ))}
-          </div>{/* Buttons side by side */}
-    <div className="flex justify-center gap-4 mt-4">
-      <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm">
-        {featuredProject.button}
-      </button>
-      <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm">
-        <a href="https://storage-web-app2.vercel.app/">View Project</a>
-      </button>
-    </div>
+          </div>
+          {/* Buttons side by side */}
+          <div className="flex justify-center gap-4 mt-4">
+            <button className="bg-blue-500 hover:bg-blue-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm">
+              {featuredProject.button}
+            </button>
+            {featuredProject.liveUrl && (
+              <a
+                href={featuredProject.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="bg-green-500 hover:bg-green-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm inline-block"
+              >
+                View Project
+              </a>
+            )}
+          </div>
         </div>
       </motion.div>
 
@@ -258,14 +280,14 @@ export default function Projects({ isMobile }: ProjectsProps) {
         <div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50"
           onClick={closeModal}
-          style={{ overflow: "auto" }} // <-- allow scrolling inside the modal overlay
+          style={{ overflow: "auto" }}
         >
           <div
             className="bg-gray-900 rounded-2xl max-w-3xl w-full p-6 relative shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             style={{
-              maxHeight: "90vh", // <-- limit modal height
-              overflowY: "auto", // <-- enable vertical scrolling
+              maxHeight: "90vh",
+              overflowY: "auto",
             }}
           >
             <button
