@@ -36,7 +36,7 @@ export const projects: Project[] = [
     button: "Learn More",
     skills: ["React", "Tailwind CSS", "JavaScript", "Web Workers", "AI", "transformers.js"],
     featured: false,
-    liveUrl: "https://ai-background-remover-nu.vercel.app/",
+    liveUrl: "https://ai-website-navy-one.vercel.app/",
   },
   {
     title: "Artolog.ca",
