@@ -123,7 +123,7 @@ const ProjectCard = memo(function ProjectCard({
               onClick={handleStopPropagation}
               className="bg-green-500 hover:bg-green-400 text-white px-4 py-2 rounded-lg shadow-md transition text-sm inline-block"
             >
-              View Project
+              Try Project
             </a>
           )}
         </div>
@@ -334,7 +334,7 @@ const FeaturedProject = memo(function FeaturedProject({
               onClick={handleStopPropagation}
               className="bg-green-500 hover:bg-green-400 text-white px-6 py-3 rounded-lg shadow-lg font-medium transition text-sm inline-block"
             >
-              View Project
+             Try Project
             </a>
           )}
         </div>

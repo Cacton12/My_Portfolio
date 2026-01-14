@@ -19,25 +19,63 @@ export interface ProjectsProps {
 // ---- Data ----
 export const projects: Project[] = [
   {
+    title: "FlashChat AI",
+    description:
+      "A fast, responsive AI chatbot powered by Gemini 3 Flash Preview, designed for real-time conversations and code assistance.",
+    videoUrl: "/demos/temp.mp4",
+    details: `
+    FlashChat AI demonstrates my ability to integrate modern large language models into a polished, real-time web application.
+    The chatbot leverages multiple Google AI models such as Gemini 3 and Gemma 3. All of this was made for free I did this by detecting when a free tier limit was hit and changing models.<br><br>
+    Built with Next.js (App Router), React, Tailwind CSS, and streaming API responses to deliver a smooth, chat-style user experience with optimized performance and clean UI design.<br><br>
+    View the code on GitHub:<br>
+    <a href="https://github.com/Cacton12/chatbot_website" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
+      https://github.com/Cacton12/chatbot_website
+    </a>
+  `,
+    src: "/ChatbotScreenshot.jpg",
+    mobileSrc: "/ChatbotScreenshot.jpg",
+    button: "Learn more",
+    skills: [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Gemini API",
+      "Streaming Responses",
+      "AI",
+      "JavaScript",
+    ],
+    featured: false,
+    liveUrl: "https://flashchat-xi.vercel.app/",
+  },
+  {
     title: "AI Background Remover",
     description:
-      "A web app that instantly removes image backgrounds locally in the browser using AI — no uploads required.",
-    videoUrl: "/demos/Background Remover AI - Google Chrome 2026-01-07 13-08-08.mp4",
+      "A web app that instantly removes image backgrounds locally in the browser using AI, ensuring user privacy without server uploads.",
+    videoUrl:
+      "/demos/Background Remover AI - Google Chrome 2026-01-07 13-08-08.mp4",
     details: `
     This project showcases my ability to integrate AI models into a frontend application, allowing users to remove image backgrounds instantly without sending data to a server. 
     Built with React, Tailwind CSS, Web Workers, and transformers.js for performant local AI processing.<br><br>
     View the code on GitHub:<br>
-    <a href="https://github.com/Cacton12/AI-Background-Remover" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
-      https://github.com/Cacton12/AI-Background-Remover
+    <a href="https://github.com/Cacton12/ai_website" target="_blank" rel="noopener noreferrer" class="text-blue-500 underline">
+      https://github.com/Cacton12/ai_website
     </a>
   `,
     src: "/Background_Gone.png",
     mobileSrc: "/Background_Gone.png",
-    button: "Learn More",
-    skills: ["React", "Tailwind CSS", "JavaScript", "Web Workers", "AI", "transformers.js"],
+    button: "Learn more",
+    skills: [
+      "React",
+      "Tailwind CSS",
+      "JavaScript",
+      "Web Workers",
+      "AI",
+      "transformers.js",
+    ],
     featured: false,
     liveUrl: "https://ai-website-navy-one.vercel.app/",
   },
+
   {
     title: "Artolog.ca",
     description:
@@ -104,7 +142,7 @@ export const projects: Project[] = [
   `,
     src: "/Photo_Storage_App.png",
     mobileSrc: "/Photo_Storage_App.png",
-    button: "Learn More",
+    button: "Learn more",
     skills: [
       "Next.js",
       "C#",

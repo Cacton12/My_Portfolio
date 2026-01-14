@@ -21,6 +21,9 @@ const skills = [
   ".NET",
   "Docker",
   "Next.js",
+  "Azure",
+  "Cloudflare",
+  "Gemini API",
 ];
 
 export default function Skills() {
