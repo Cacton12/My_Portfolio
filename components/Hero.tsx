@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const backgroundImages = [
-  "/PicturesOfMe/Berta.jpeg",
-  "/PicturesOfMe/image3.jpeg",
-  "/PicturesOfMe/image2.jpeg",
+  "/PicturesOfMe/Berta.jpg",
+  "/PicturesOfMe/image3.jpg",
+  "/PicturesOfMe/image2.jpg",
 ];
 
 export default function Hero() {
@@ -15,7 +16,7 @@ export default function Hero() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-    }, 6000); // Even 6s rotation
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
@@ -26,17 +27,31 @@ export default function Hero() {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        {backgroundImages.map((img, index) => (
-          <motion.div
-            key={index}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `url(${img})`,
-              opacity: currentImageIndex === index ? 1 : 0,
-              transition: "opacity 1s ease-in-out",
-            }}
-          />
-        ))}
+        <AnimatePresence>
+          {backgroundImages.map((img, index) => {
+            if (index !== currentImageIndex) return null;
+
+            return (
+              <motion.div
+                key={index}
+                className="absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.9, ease: "ease-in-out" }}
+              >
+                <Image
+                  src={img}
+                  alt={`Background ${index + 1}`}
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: "cover" }}
+                  priority={index === 0}
+                />
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
         <div className="absolute inset-0 bg-black/60" />
       </div>
 

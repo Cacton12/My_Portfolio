@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import EmailSection from "./EmailSection";
 
 export default function ContactMe() {
@@ -29,14 +30,29 @@ export default function ContactMe() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="/icons8-linkedin.svg" alt="LinkedIn Logo" className="w-12 h-12" />
+              <Image
+                src="/icons8-linkedin.svg"
+                alt="LinkedIn Logo"
+                width={48}
+                height={48}
+                className="hover:scale-110 transition-transform duration-200"
+                priority={false}
+              />
             </a>
+
             <a
               href="https://github.com/Cacton12"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img src="/GitHub_Logo_White.png" alt="GitHub Logo" className="w-16 h-16 object-contain" />
+              <Image
+                src="/GitHub_Logo_White.png"
+                alt="GitHub Logo"
+                width={64}
+                height={64}
+                className="object-contain hover:scale-110 transition-transform duration-200"
+                priority={false}
+              />
             </a>
           </div>
         </div>
