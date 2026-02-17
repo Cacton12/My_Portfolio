@@ -5,10 +5,9 @@ import { motion, useAnimation, useInView } from "framer-motion";
 
 interface SkillTagProps {
   skill: string;
-  delay: number;
 }
 
-export default function SkillTag({ skill, delay }: SkillTagProps) {
+export default function SkillTag({ skill }: SkillTagProps) {
   const ref = useRef(null);
   const controls = useAnimation();
   const isInView = useInView(ref, { once: false, margin: "0px" });
@@ -32,7 +31,7 @@ export default function SkillTag({ skill, delay }: SkillTagProps) {
       variants={variants}
       initial="hidden"
       animate={controls}
-      transition={{ duration: 0.4, delay }}
+      transition={{ duration: 0.4 }}
       className="bg-gray-800 text-sm px-4 py-2 rounded-full text-white shadow-md hover:bg-blue-500 hover:scale-105 transition duration-300">
     
       {skill}
